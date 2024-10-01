@@ -5,9 +5,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
 import Layout from "./Layout.js";
-import Home from "./Home.js";
-// import Doc from './Doc.js';
-// import Add from "./Add.js";
+import Home from "./components/Home.js";
+import Doc from './components/Doc.js';
+import DocumentForm from "./components/DocumentForm.js";
 
 function App() {
   return (
@@ -15,6 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/:id" element={<Doc />}/>
+          <Route path="/documentform" element={<DocumentForm />}/>
         </Route>
       </Routes>
     </BrowserRouter>
