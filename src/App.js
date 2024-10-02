@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import logo from './logo.svg';
 import './App.css';
 
-import Layout from "./Layout.js";
+import Layout from "./components/Layout.js";
 import Home from "./components/Home.js";
-import Doc from './components/Doc.js';
+import Document from './components/Document.js';
 import DocumentForm from "./components/DocumentForm.js";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/:id" element={<Doc />}/>
+          <Route path="/:id" element={<Document />}/>
           <Route path="/documentform" element={<DocumentForm />}/>
         </Route>
       </Routes>
