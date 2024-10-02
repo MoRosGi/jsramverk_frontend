@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const Document = () => {
     const { id } = useParams();
@@ -30,19 +30,21 @@ const Document = () => {
 
     return (
         <main>
-        <h1>Doc</h1>
         {document ? (
             document.error ? (
                 <p>{document.error}</p>
             ) : (
                 <div>
-                    <h2>{document.title}</h2>
+                    <h1>{document.title}</h1>
                     <p>{document.content}</p>
                 </div>
             )
         ) : (
             <p>Laddar...</p>
         )}
+        <Link to={`/documentedit/${document._id}`}>
+        <button>Redigera</button>
+        </Link>
         </main>
     );
 };
