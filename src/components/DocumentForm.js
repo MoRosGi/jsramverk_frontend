@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router";
 
 const DocumentForm = () => {
     const [formDocument, setFormDocument] = useState({ title: '', content: '' });
+    const navigate = useNavigate();
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +24,8 @@ const DocumentForm = () => {
     
             const result = await response.json();
             console.log('Success:', result);
-    
+            navigate('/');
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -31,23 +34,28 @@ const DocumentForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-            <label>Title:</label>
+            <div>
+                <label>Title:</label>
+            </div>
             <input
                 type="text"
                 name="title"
                 value={formDocument.title}
                 onChange={handleChange}
+                required
             />
             </div>
             <div>
-            <label>Content:</label>
+            <div>
+                <label>Content:</label>
+            </div>
             <textarea
                 name="content"
                 value={formDocument.content}
                 onChange={handleChange}
             />
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">Skapa</button>
         </form>
     );
 };
