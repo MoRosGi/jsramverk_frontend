@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 const Doc = () => {
     const { id } = useParams();
-    const [message, setMessage] = useState('');
+    const [document, setDocument] = useState('');
 
     useEffect(() => {
 
@@ -15,7 +15,7 @@ const Doc = () => {
 
             console.log(data);
 
-            setMessage(data.data);
+            setDocument(data.data);
             // .then(res => res.json())
             // .then(res => setMessage(res.description));
             // .then(res => res);
@@ -26,18 +26,18 @@ const Doc = () => {
 
         fetchData();
         
-    });
+    }, [id]);
 
     return (
         <main>
         <h1>Doc</h1>
-        {message ? (
-            message.error ? (
-                <p>{message.error}</p>
+        {document ? (
+            document.error ? (
+                <p>{document.error}</p>
             ) : (
                 <div>
-                    <h2>{message.title}</h2>
-                    <p>{message.content}</p>
+                    <h2>{document.title}</h2>
+                    <p>{document.content}</p>
                 </div>
             )
         ) : (
