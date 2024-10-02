@@ -8,6 +8,7 @@ import Layout from "./components/Layout.js";
 import Home from "./components/Home.js";
 import Document from './components/Document.js';
 import DocumentForm from "./components/DocumentForm.js";
+import DocumentEdit from "./components/DocumentEdit.js";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/:id" element={<Document />}/>
           <Route path="/documentform" element={<DocumentForm />}/>
+          <Route path="/documentedit/:id" element={<DocumentEdit />}/>
         </Route>
       </Routes>
     </BrowserRouter>
