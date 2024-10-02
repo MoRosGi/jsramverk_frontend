@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-    const [messages, setMessages] = useState([]); // Init as array inst of string
+    const [documents, setDocuments] = useState([]); // Init as array inst of string
 
     useEffect(() => {
         // const fetchData = async () => {
@@ -23,12 +23,12 @@ const Home = () => {
                 // const data = await response.json();
                 console.log("Data", data);
                 
-                // setMessages(data.data); // nested object
-                setMessages(data); // nested object
-                console.log("Messages", messages);
+                // setDocuments(data.data); // nested object
+                setDocuments(data); // nested object
+                console.log("Documents", documents);
             } catch (e) {
                 console.error(e);
-                setMessages([{ error: 'Error fetching data'}]); // Adjust error for display instead of array
+                setDocuments([{ error: 'Error fetching data'}]); // Adjust error for display instead of array
             }
         // };
 
@@ -47,18 +47,18 @@ const Home = () => {
     return (
         <main>
             <h1>Hem</h1>
-            {messages.length > 0 ? ( // Check if array
-                messages.map((message) => ( // Iterate
+            {documents.length > 0 ? ( // Check if array
+                documents.map((document) => ( // Iterate
                     // Use _id as key prop, give unique id to let React track elements 
                     // when re-rendering virtual DOM
-                    <div key={message._id}>
-                        <Link to={`/${message._id}`}><h2>{message.title}</h2></Link>
-                        <p>{message.content}</p>
+                    <div key={document._id}>
+                        <Link to={`/${document._id}`}><h2>{document.title}</h2></Link>
+                        <p>{document.content}</p>
                     </div>
                 ))
             ) : (
                 // Conditional rendering, '?.'= optional chaining, prevents error if element is undefined.
-                <p>{messages[0]?.error ? messages[0].error : 'Laddar...'}</p>
+                <p>{documents[0]?.error ? documents[0].error : 'Laddar...'}</p>
             )}
             <button>
                 <Link to="/documentform">Nytt dokument</Link>
