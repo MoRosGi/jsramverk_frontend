@@ -60,21 +60,23 @@ const DocumentEdit = () => {
         <form onSubmit={handleSubmit}>
             <div>
             <div>
-                <label>Title:</label>
+                <label htmlFor='title'>Title:</label>
             </div>
             <input
                 type="text"
                 name="title"
+                id="title"
                 value={documentEdit.title}
                 onChange={handleChange}
             />
             </div>
             <div>
             <div>
-                <label>Content:</label>
+                <label htmlFor='content'>Content:</label>
             </div>
             <textarea
                 name="content"
+                id="content"
                 value={documentEdit.content}
                 onChange={handleChange}
             />
