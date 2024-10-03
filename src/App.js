@@ -13,6 +13,7 @@ import DocumentEdit from "./components/DocumentEdit.js";
 function App() {
   return (
     <BrowserRouter>
+    <h1>SSR-Editor</h1>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
