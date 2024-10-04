@@ -23,7 +23,7 @@ const Home = () => {
 
     return (
         <main>
-            <h1>Home</h1>
+            <h1>Hem</h1>
             {documents.length > 0 ? (
                 documents.map((document) => (
                     <div key={document._id}>
