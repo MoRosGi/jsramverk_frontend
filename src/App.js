@@ -1,6 +1,6 @@
 import React from "react";
 // import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 // import logo from './logo.svg';
 import './App.css';
 
@@ -12,7 +12,7 @@ import DocumentEdit from "./components/DocumentEdit.js";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
     <h1>SSR-Editor</h1>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -22,7 +22,7 @@ function App() {
           <Route path="/documentedit/:id" element={<DocumentEdit />}/>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
