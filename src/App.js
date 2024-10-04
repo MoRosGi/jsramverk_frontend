@@ -1,23 +1,26 @@
 import React from "react";
-// import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import logo from './logo.svg';
+import { HashRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
-import Layout from "./Layout.js";
-import Home from "./Home.js";
-// import Doc from './Doc.js';
-// import Add from "./Add.js";
+import Layout from "./components/Layout.js";
+import Home from "./components/Home.js";
+import Document from './components/Document.js';
+import DocumentForm from "./components/DocumentForm.js";
+import DocumentEdit from "./components/DocumentEdit.js";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
+    <h1>SSR-Editor</h1>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/:id" element={<Document />}/>
+          <Route path="/documentform" element={<DocumentForm />}/>
+          <Route path="/documentedit/:id" element={<DocumentEdit />}/>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
