@@ -1,7 +1,5 @@
 import React from "react";
-// import ReactDOM from "react-dom/client";
 import { HashRouter, Routes, Route } from "react-router-dom";
-// import logo from './logo.svg';
 import './App.css';
 
 import Layout from "./components/Layout.js";

@@ -13,12 +13,7 @@ const Document = () => {
 
             const data = await response.json();
 
-            console.log(data);
-
             setDocument(data.data);
-            // .then(res => res.json())
-            // .then(res => setMessage(res.description));
-            // .then(res => res);
             } catch (e) {
             console.error(e);
             }
