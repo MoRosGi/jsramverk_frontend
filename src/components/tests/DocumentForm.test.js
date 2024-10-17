@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import DocumentForm from './DocumentForm';
+import DocumentForm from '../DocumentForm.js';
 
 test('renders Title label', () => {
     render(<MemoryRouter><DocumentForm /></MemoryRouter>);

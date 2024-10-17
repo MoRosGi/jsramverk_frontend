@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import DocumentEdit from './DocumentEdit';
+import DocumentEdit from '../DocumentEdit.js';
 
 test('renders Title label', () => {
     render(<MemoryRouter><DocumentEdit /></MemoryRouter>);

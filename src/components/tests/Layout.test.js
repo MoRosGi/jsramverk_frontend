@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Layout from './Layout';
+import Layout from '../Layout.js';
 
 test('renders nav link 1 text', () => {
     render(<MemoryRouter><Layout /></MemoryRouter>);
