@@ -8,6 +8,8 @@ import Document from './components/Document.js';
 import DocumentForm from "./components/DocumentForm.js";
 import DocumentEdit from "./components/DocumentEdit.js";
 import RegisterForm from "./components/RegisterForm.js";
+import LoginForm from "./components/LoginForm.js";
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
           <Route path="/documentform" element={<DocumentForm />}/>
           <Route path="/documentedit/:id" element={<DocumentEdit />}/>
           <Route path="/register" element={<RegisterForm />}/>
+          <Route path="/login" element={<LoginForm />}/>
         </Route>
       </Routes>
     </HashRouter>
