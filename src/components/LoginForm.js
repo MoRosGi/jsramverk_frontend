@@ -24,6 +24,11 @@ const LoginForm = () => {
     
             const result = await response.json();
             console.log('Success:', result);
+            const token = result.token;
+            sessionStorage.setItem('token', token);
+            let newToken =sessionStorage.getItem('token');
+            console.log(newToken);
+            // sessionStorage.setItem('email', email);
             // Handle redirect depending on token or no token
             navigate('/');
 
