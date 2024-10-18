@@ -24,6 +24,11 @@ const RegisterForm = () => {
     
             const result = await response.json();
             console.log('Success:', result);
+
+            console.log('Token:', result.data.token);
+            const token = result.data.token;
+            sessionStorage.setItem('token', token);
+
             // Handle redirect depending on token or no token
             navigate('/');
 

@@ -6,16 +6,13 @@ const Layout = () => {
         <nav>
             <ul>
             <li>
-                <Link to="/">Hem</Link>
-            </li>
-            <li>
-                <Link to="/documentform">Nytt dokument</Link>
-            </li>
-            <li>
-                <Link to="/login">Logga in</Link>
+                <Link to="/">Logga in</Link>
             </li>
             <li>
                 <Link to="/register">Registrera</Link>
+            </li>
+            <li>
+                <Link to="/documentform">Nytt dokument</Link>
             </li>
             </ul>
         </nav>
