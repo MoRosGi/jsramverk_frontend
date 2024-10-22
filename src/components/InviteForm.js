@@ -23,9 +23,8 @@ const InviteForm = ({ documentId }) => {
             });
     
             const result = await response.json();
-            const token = result.data.token;
 
-            sessionStorage.setItem('token', token);
+            console.log(result);
 
         } catch (error) {
             console.error('Error:', error);
