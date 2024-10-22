@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
 import { useParams } from 'react-router-dom';
+import InviteForm from './InviteForm';
 
 const DocumentEdit = () => {
     const { id } = useParams();
     const [documentEdit, setDocumentEdit] = useState({ title: '', content: '' });
+    // const [documentId, setDocumentId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,6 +18,7 @@ const DocumentEdit = () => {
             const data = await response.json();
 
             setDocumentEdit(data.data);
+            // setDocumentId(data.data._id);
             } catch (e) {
             console.error(e);
             }
@@ -54,32 +57,35 @@ const DocumentEdit = () => {
     };
     
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-            <div>
-                <label htmlFor='title'>Title:</label>
-            </div>
-            <input
-                type="text"
-                name="title"
-                id="title"
-                value={documentEdit.title}
-                onChange={handleChange}
-            />
-            </div>
-            <div>
-            <div>
-                <label htmlFor='content'>Content:</label>
-            </div>
-            <textarea
-                name="content"
-                id="content"
-                value={documentEdit.content}
-                onChange={handleChange}
-            />
-            </div>
-            <button type="submit">Uppdatera</button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit}>
+                <div>
+                <div>
+                    <label htmlFor='title'>Title:</label>
+                </div>
+                <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    value={documentEdit.title}
+                    onChange={handleChange}
+                />
+                </div>
+                <div>
+                <div>
+                    <label htmlFor='content'>Content:</label>
+                </div>
+                <textarea
+                    name="content"
+                    id="content"
+                    value={documentEdit.content}
+                    onChange={handleChange}
+                />
+                </div>
+                <button type="submit">Uppdatera</button>
+            </form>
+            <InviteForm documentId={id} />
+        </>
     );
 };
 
