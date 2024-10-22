@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
     const [formLogin, setFormLogin] = useState({ email: '', password: '' });
@@ -23,9 +24,14 @@ const LoginForm = () => {
             });
     
             const result = await response.json();
-            console.log('Success:', result);
+            // console.log('Success:', result);
+            // console.log('Token:', result.data.token);
+            const token = result.data.token;
+            sessionStorage.setItem('token', token);
+            
+            // sessionStorage.setItem('email', email);
             // Handle redirect depending on token or no token
-            navigate('/');
+            navigate('/userdocuments');
 
         } catch (error) {
             console.error('Error:', error);
@@ -60,6 +66,7 @@ const LoginForm = () => {
             />
             </div>
             <button type="submit">Logga in</button>
+            <Link to="/register"><button type="button">Registrera</button></Link>
         </form>
     );
 };

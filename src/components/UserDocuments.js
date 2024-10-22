@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const UserDocuments = () => {
     const [documents, setDocuments] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents');
+                const response = await fetch(
+                    'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents',
+                    {
+                        method: 'GET',
+                        headers: {
+                            'x-access-token': sessionStorage.getItem("token")
+                        }
+                    }
+                );
                 const data = await response.json();
                 setDocuments(data.data);
 
@@ -23,7 +31,7 @@ const Home = () => {
 
     return (
         <main>
-            <h1>Hem</h1>
+            <h1>Mina dokument</h1>
             {documents.length > 0 ? (
                 documents.map((document) => (
                     <div key={document._id}>
@@ -40,4 +48,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default UserDocuments;

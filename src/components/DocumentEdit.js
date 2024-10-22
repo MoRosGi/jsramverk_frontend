@@ -48,6 +48,8 @@ const DocumentEdit = () => {
 
         } catch (error) {
             console.error('Error:', error);
+            sessionStorage.clear();
+            navigate('/login');
         }
     };
     
