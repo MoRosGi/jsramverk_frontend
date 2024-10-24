@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 const Layout = () => {
     return (
@@ -15,6 +16,7 @@ const Layout = () => {
                 <Link to="/documentform">Nytt dokument</Link>
             </li>
             </ul>
+            <LogoutButton />
         </nav>
 
         <Outlet />
