@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 
 const InviteForm = ({ documentId }) => {
 
-    const [inviteEmail, setInviteEmail] = useState('');
+    const [inviteForm, setInviteForm,] = useState({ receiver: '', documentId: documentId });
     
     const handleChange = (e) => {
-        // const { name, value } = e.target;
-        // setInviteEmail({ ...inviteEmail, [name]: value });
-        setInviteEmail(e.target.value);
+        const { name, value } = e.target;
+        setInviteForm({ ...inviteForm, [name]: value });
+        // setInviteForm(e.target.value);
         };
     
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(inviteEmail);
+        console.log(inviteForm);
+        console.log(typeof(inviteForm.documentId));
 
         try {
             const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/invite', {
@@ -22,7 +23,7 @@ const InviteForm = ({ documentId }) => {
                 'Content-Type': 'application/json',
                 'x-access-token': sessionStorage.getItem('token')
             },
-            body: JSON.stringify({ documentId, inviteEmail })
+            body: JSON.stringify(inviteForm)
             });
     
             const result = await response.json();
@@ -39,9 +40,9 @@ const InviteForm = ({ documentId }) => {
                 <label htmlFor='email'>Add collaborator</label>
             </div>
             <select
-                name="inviteEmail"
+                name="receiver"
                 placeholder="Recipient's e-mail"
-                value={inviteEmail}
+                value={inviteForm.receiver}
                 onChange={handleChange}
                 required
             >
@@ -50,6 +51,13 @@ const InviteForm = ({ documentId }) => {
                 <option value="angt23@student.bth.se">Annie Student</option>
                 <option value="mogi23@student.bth.se">Morgane Student</option>
             </select>
+            <input
+                type="hidden"
+                name="documentId"
+                id="documentId"
+                value={inviteForm.documentId}
+                onChange={handleChange}
+            />
             <button type="submit">Send</button>
         </form>
     );

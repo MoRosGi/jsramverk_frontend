@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 const RegisterForm = () => {
     const [formRegister, setFormRegister] = useState({ email: '', password: '' });
     const navigate = useNavigate();
+    const inviteId = sessionStorage.getItem('inviteId');
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,6 +29,10 @@ const RegisterForm = () => {
             console.log('Token:', result.data.token);
             const token = result.data.token;
             sessionStorage.setItem('token', token);
+
+            if (inviteId) {
+                navigate(`/invite/${inviteId}`);
+            }
 
             // Handle redirect depending on token or no token
             navigate('/');
