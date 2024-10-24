@@ -17,7 +17,8 @@ const DocumentForm = () => {
             const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-access-token': sessionStorage.getItem("token")
             },
             body: JSON.stringify(formDocument)
             });

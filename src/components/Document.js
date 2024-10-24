@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import InviteForm from './InviteForm';
 
 const Document = () => {
     const { id } = useParams();
@@ -9,7 +10,15 @@ const Document = () => {
 
         const fetchData = async () => {
             try {
-            const response = await fetch(`https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`);
+            const response = await fetch(
+                `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'x-access-token': sessionStorage.getItem("token")
+                    }
+                }
+            );
 
             const data = await response.json();
 
@@ -40,6 +49,7 @@ const Document = () => {
         <Link to={`/documentedit/${document._id}`}>
         <button>Redigera</button>
         </Link>
+        <InviteForm documentId={id} />
         </main>
     );
 };

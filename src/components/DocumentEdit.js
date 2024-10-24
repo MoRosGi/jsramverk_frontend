@@ -13,7 +13,15 @@ const DocumentEdit = () => {
 
         const fetchData = async () => {
             try {
-            const response = await fetch(`https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`);
+            const response = await fetch(
+                `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'x-access-token': sessionStorage.getItem("token")
+                    }
+                }
+            );
 
             const data = await response.json();
 
@@ -40,7 +48,8 @@ const DocumentEdit = () => {
             const response = await fetch(`https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-access-token': sessionStorage.getItem("token")
             },
             body: JSON.stringify(documentEdit)
             });
