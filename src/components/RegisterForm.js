@@ -48,7 +48,7 @@ const RegisterForm = () => {
         <form onSubmit={handleSubmit}>
             <div>
             <div>
-                <label htmlFor='email'>Email:</label>
+                <label htmlFor='email'>E-mail:</label>
             </div>
             <input
                 type="email"
@@ -71,7 +71,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
             />
             </div>
-            <button type="submit">Skapa konto</button>
+            <button type="submit">Register</button>
         </form>
     );
 };

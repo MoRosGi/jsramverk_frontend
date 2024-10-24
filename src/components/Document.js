@@ -46,10 +46,10 @@ const Document = () => {
                 </div>
             )
         ) : (
-            <p>Laddar...</p>
+            <p>Loading...</p>
         )}
         <Link to={`/documentedit/${document._id}`}>
-        <button>Redigera</button>
+        <button>Edit</button>
         </Link>
         <InviteForm documentId={id} />
         </main>

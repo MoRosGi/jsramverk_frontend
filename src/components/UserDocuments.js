@@ -35,7 +35,7 @@ const UserDocuments = () => {
     return (
         <AuthWrapper>
             <main>
-                <h1>Mina dokument</h1>
+                <h1>My documents</h1>
                 {documents.length > 0 ? (
                     documents.map((document) => (
                         <div key={document._id}>
@@ -46,7 +46,7 @@ const UserDocuments = () => {
                     <p>{documents[0]?.error ? documents[0].error : 'Laddar...'}</p>
                 )}
                 <button>
-                    <Link to="/documentform">Nytt dokument</Link>
+                    <Link to="/documentform">Create new document</Link>
                 </button>
             </main>
         </AuthWrapper>

@@ -60,7 +60,7 @@ const DocumentForm = () => {
                 onChange={handleChange}
             />
             </div>
-            <button type="submit">Skapa</button>
+            <button type="submit">Submit</button>
         </form>
     );
 };

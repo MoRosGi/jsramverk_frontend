@@ -7,18 +7,17 @@ const Layout = () => {
         <nav>
             <ul>
             <li>
-                <Link to="/">Logga in</Link>
+                <Link to="/">Log in</Link>
             </li>
             <li>
-                <Link to="/register">Registrera</Link>
+                <Link to="/register">Register</Link>
             </li>
             <li>
-                <Link to="/documentform">Nytt dokument</Link>
+                <Link to="/documentform">Create new document</Link>
             </li>
             </ul>
             <LogoutButton />
         </nav>
-
         <Outlet />
         </>
     )

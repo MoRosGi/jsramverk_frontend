@@ -95,7 +95,7 @@ const DocumentEdit = () => {
                     onChange={handleChange}
                 />
                 </div>
-                <button type="submit">Uppdatera</button>
+                <button type="submit">Submit</button>
             </form>
             <InviteForm documentId={id} />
         </>
