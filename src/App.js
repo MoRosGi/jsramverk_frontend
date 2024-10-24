@@ -3,7 +3,6 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
 import Layout from "./components/Layout.js";
-// import Home from "./components/Home.js";
 import Document from './components/Document.js';
 import DocumentForm from "./components/DocumentForm.js";
 import DocumentEdit from "./components/DocumentEdit.js";
