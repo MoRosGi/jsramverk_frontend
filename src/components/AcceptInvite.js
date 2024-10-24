@@ -25,20 +25,11 @@ const AcceptInvite = () => {
 
                 if (result.errors) {
                     toast(result.errors[0].detail);
-    
+
                 } else {
-    
+
                     navigate('/userdocuments');
                 }
-
-                // if (result.status === 200) {
-                //     navigate('/userdocuments');
-                // }
-
-                // if (result.errors) {
-                //     toast(result.errors[0].detail);
-
-                // }
 
                 console.log(result);
 

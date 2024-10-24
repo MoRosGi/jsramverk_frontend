@@ -7,15 +7,15 @@ const LoginForm = () => {
     const [formLogin, setFormLogin] = useState({ email: '', password: '' });
     const navigate = useNavigate();
     const inviteId = sessionStorage.getItem('inviteId');
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormLogin({ ...formLogin, [name]: value });
         };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/login', {
             method: 'POST',
@@ -24,12 +24,8 @@ const LoginForm = () => {
             },
             body: JSON.stringify(formLogin)
             });
-    
-            const result = await response.json();
 
-            // if (result.status === 200) {
-            //     navigate('/userdocuments');
-            // }
+            const result = await response.json();
 
             if (result.errors) {
                 toast(result.errors[0].detail);

@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 const DocumentEdit = () => {
     const { id } = useParams();
     const [documentEdit, setDocumentEdit] = useState({ title: '', content: '' });
-    // const [documentId, setDocumentId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,7 +26,6 @@ const DocumentEdit = () => {
             const data = await response.json();
 
             setDocumentEdit(data.data);
-            // setDocumentId(data.data._id);
             } catch (e) {
                 toast(e);
                 console.error(e);
@@ -37,15 +35,15 @@ const DocumentEdit = () => {
         fetchData();
         
     }, [id]);
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setDocumentEdit({ ...documentEdit, [name]: value });
         };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch(`https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`, {
             method: 'PUT',
@@ -55,7 +53,7 @@ const DocumentEdit = () => {
             },
             body: JSON.stringify(documentEdit)
             });
-    
+
             const result = await response.json();
             toast(result);
             console.log('Success:', result);
@@ -68,7 +66,7 @@ const DocumentEdit = () => {
             navigate('/login');
         }
     };
-    
+
     return (
         <>
             <form onSubmit={handleSubmit}>

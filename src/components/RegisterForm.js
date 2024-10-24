@@ -6,15 +6,15 @@ const RegisterForm = () => {
     const [formRegister, setFormRegister] = useState({ email: '', password: '' });
     const navigate = useNavigate();
     const inviteId = sessionStorage.getItem('inviteId');
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormRegister({ ...formRegister, [name]: value });
         };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/register', {
             method: 'POST',
@@ -23,7 +23,7 @@ const RegisterForm = () => {
             },
             body: JSON.stringify(formRegister)
             });
-    
+
             const result = await response.json();
             console.log('Success:', result);
 
@@ -35,7 +35,6 @@ const RegisterForm = () => {
                 navigate(`/invite/${inviteId}`);
             }
 
-            // Handle redirect depending on token or no token
             navigate('/');
 
         } catch (error) {

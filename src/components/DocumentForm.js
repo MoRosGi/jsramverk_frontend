@@ -5,15 +5,15 @@ import { toast } from 'react-toastify';
 const DocumentForm = () => {
     const [formDocument, setFormDocument] = useState({ title: '', content: '' });
     const navigate = useNavigate();
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormDocument({ ...formDocument, [name]: value });
         };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents', {
             method: 'POST',
@@ -23,7 +23,7 @@ const DocumentForm = () => {
             },
             body: JSON.stringify(formDocument)
             });
-    
+
             const result = await response.json();
             console.log('Success:', result);
             navigate('/userdocuments');
@@ -33,7 +33,7 @@ const DocumentForm = () => {
             console.error('Error:', error);
         }
     };
-    
+
     return (
         <form onSubmit={handleSubmit}>
             <div>
