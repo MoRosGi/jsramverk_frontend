@@ -10,6 +10,7 @@ import DocumentEdit from "./components/DocumentEdit.js";
 import RegisterForm from "./components/RegisterForm.js";
 import LoginForm from "./components/LoginForm.js";
 import UserDocuments from "./components/UserDocuments.js";
+import AcceptInvite from "./components/AcceptInvite.js";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/documentedit/:id" element={<DocumentEdit />}/>
           <Route path="/register" element={<RegisterForm />}/>
           <Route path="/userdocuments" element={<UserDocuments />}/>
+          <Route path="/invite/:inviteId" element={<AcceptInvite />}/>
         </Route>
       </Routes>
     </HashRouter>
