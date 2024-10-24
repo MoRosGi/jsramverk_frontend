@@ -4,13 +4,11 @@ import { toast } from 'react-toastify';
 const InviteForm = ({ documentId }) => {
 
     const [inviteForm, setInviteForm,] = useState({ receiver: '', documentId: documentId });
-    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInviteForm({ ...inviteForm, [name]: value });
-        // setInviteForm(e.target.value);
         };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -26,7 +24,7 @@ const InviteForm = ({ documentId }) => {
             },
             body: JSON.stringify(inviteForm)
             });
-    
+
             const result = await response.json();
 
             toast(result);
@@ -54,13 +52,6 @@ const InviteForm = ({ documentId }) => {
                 <option value="angt23@student.bth.se">Annie Student</option>
                 <option value="mogi23@student.bth.se">Morgane Student</option>
             </select>
-            <input
-                type="hidden"
-                name="documentId"
-                id="documentId"
-                value={inviteForm.documentId}
-                onChange={handleChange}
-            />
             <button type="submit">Send</button>
         </form>
     );
