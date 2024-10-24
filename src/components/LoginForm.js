@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
     const [formLogin, setFormLogin] = useState({ email: '', password: '' });
     const navigate = useNavigate();
+    const inviteId = sessionStorage.getItem('inviteId');
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,16 +26,28 @@ const LoginForm = () => {
             });
     
             const result = await response.json();
-            // console.log('Success:', result);
-            // console.log('Token:', result.data.token);
-            const token = result.data.token;
-            sessionStorage.setItem('token', token);
-            
-            // sessionStorage.setItem('email', email);
-            // Handle redirect depending on token or no token
-            navigate('/userdocuments');
+
+            // if (result.status === 200) {
+            //     navigate('/userdocuments');
+            // }
+
+            if (result.errors) {
+                toast(result.errors[0].detail);
+
+            } else {
+                const token = result.data.token;
+                sessionStorage.setItem('token', token);
+
+                if (inviteId) {
+                    navigate(`/invite/${inviteId}`);
+                }
+
+                navigate('/userdocuments');
+                console.log(sessionStorage.getItem('inviteId'));
+            }
 
         } catch (error) {
+            toast(error);
             console.error('Error:', error);
         }
     };

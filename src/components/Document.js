@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import InviteForm from './InviteForm';
+import { toast } from 'react-toastify';
 
 const Document = () => {
     const { id } = useParams();
@@ -24,6 +25,7 @@ const Document = () => {
 
             setDocument(data.data);
             } catch (e) {
+                toast(e);
             console.error(e);
             }
         };

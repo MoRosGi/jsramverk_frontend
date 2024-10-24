@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
+import { toast } from 'react-toastify';
 
 const DocumentForm = () => {
     const [formDocument, setFormDocument] = useState({ title: '', content: '' });
@@ -25,9 +26,10 @@ const DocumentForm = () => {
     
             const result = await response.json();
             console.log('Success:', result);
-            navigate('/');
+            navigate('/userdocuments');
 
         } catch (error) {
+            toast(error);
             console.error('Error:', error);
         }
     };

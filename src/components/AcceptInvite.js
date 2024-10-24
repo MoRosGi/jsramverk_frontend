@@ -1,13 +1,11 @@
 import { useNavigate } from "react-router";
-// import { Link } from "react-router-dom";
 import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 
 const AcceptInvite = () => {
-    // const [formLogin, setFormLogin] = useState({ email: '', password: '' });
     const navigate = useNavigate();
     const { inviteId } = useParams();
     const token = sessionStorage.getItem('token');
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,14 +23,27 @@ const AcceptInvite = () => {
                 );
                 const result = await response.json();
 
-                if (result.status === 200) {
+                if (result.errors) {
+                    toast(result.errors[0].detail);
+    
+                } else {
+    
                     navigate('/userdocuments');
                 }
 
+                // if (result.status === 200) {
+                //     navigate('/userdocuments');
+                // }
+
+                // if (result.errors) {
+                //     toast(result.errors[0].detail);
+
+                // }
+
                 console.log(result);
 
-                // toast(result);
             } catch (error){
+                toast(error);
                 console.error('Error:', error);
             }
         } else {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
 import { useParams } from 'react-router-dom';
 import InviteForm from './InviteForm';
+import { toast } from 'react-toastify';
 
 const DocumentEdit = () => {
     const { id } = useParams();
@@ -28,7 +29,8 @@ const DocumentEdit = () => {
             setDocumentEdit(data.data);
             // setDocumentId(data.data._id);
             } catch (e) {
-            console.error(e);
+                toast(e);
+                console.error(e);
             }
         };
 
@@ -55,10 +57,12 @@ const DocumentEdit = () => {
             });
     
             const result = await response.json();
+            toast(result);
             console.log('Success:', result);
             navigate('/');
 
         } catch (error) {
+            toast(error);
             console.error('Error:', error);
             sessionStorage.clear();
             navigate('/login');

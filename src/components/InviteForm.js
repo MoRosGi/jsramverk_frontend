@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const InviteForm = ({ documentId }) => {
 
@@ -28,9 +29,11 @@ const InviteForm = ({ documentId }) => {
     
             const result = await response.json();
 
+            toast(result);
             console.log(result);
 
         } catch (error) {
+            toast(error);
             console.error('Error:', error);
         }
     };

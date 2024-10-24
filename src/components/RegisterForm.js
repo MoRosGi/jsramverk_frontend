@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
+import { toast } from 'react-toastify';
 
 const RegisterForm = () => {
     const [formRegister, setFormRegister] = useState({ email: '', password: '' });
@@ -38,6 +39,7 @@ const RegisterForm = () => {
             navigate('/');
 
         } catch (error) {
+            toast(error);
             console.error('Error:', error);
         }
     };
