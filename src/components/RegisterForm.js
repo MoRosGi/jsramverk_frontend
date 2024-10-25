@@ -15,6 +15,12 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Check if password is min 6 characters
+        if (formRegister.password.length < 6) {
+            toast("Password must be at least 6 characters long.");
+            return;
+        }
+
         try {
             const response = await fetch(
                 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/register',
