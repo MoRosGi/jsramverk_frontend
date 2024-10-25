@@ -7,7 +7,7 @@ const LogoutButton = () => {
         e.preventDefault();
         sessionStorage.clear();
         navigate('/');
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit}>

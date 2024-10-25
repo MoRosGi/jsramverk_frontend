@@ -11,23 +11,22 @@ const AcceptInvite = () => {
         e.preventDefault();
 
         if (token) {
-
             try {
-                const response = await fetch(`https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/invite/${inviteId}`,
+                const response = await fetch(
+                    `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/invite/${inviteId}`,
                     {
                         method: 'GET',
                         headers: {
-                            'x-access-token': sessionStorage.getItem("token")
+                            'x-access-token': token
                         }
                     }
                 );
+
                 const result = await response.json();
 
                 if (result.errors) {
                     toast(result.errors[0].detail);
-
                 } else {
-
                     navigate('/userdocuments');
                 }
 
@@ -41,7 +40,7 @@ const AcceptInvite = () => {
             sessionStorage.setItem('inviteId', inviteId);
             navigate('/');
         }
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit}>

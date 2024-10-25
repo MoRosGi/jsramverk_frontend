@@ -8,50 +8,49 @@ const Document = () => {
     const [document, setDocument] = useState('');
 
     useEffect(() => {
-
         const fetchData = async () => {
             try {
-            const response = await fetch(
-                `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'x-access-token': sessionStorage.getItem("token")
+                const response = await fetch(
+                    `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'x-access-token': sessionStorage.getItem("token")
+                        }
                     }
-                }
-            );
+                );
 
-            const data = await response.json();
+                const data = await response.json();
+                setDocument(data.data);
 
-            setDocument(data.data);
             } catch (e) {
                 toast(e);
-            console.error(e);
+                console.error(e);
             }
         };
 
         fetchData();
-        
+
     }, [id]);
 
     return (
         <main>
-        {document ? (
-            document.error ? (
-                <p>{document.error}</p>
+            {document ? (
+                document.error ? (
+                    <p>{document.error}</p>
+                ) : (
+                    <div>
+                        <h1>{document.title}</h1>
+                        <p>{document.content}</p>
+                    </div>
+                )
             ) : (
-                <div>
-                    <h1>{document.title}</h1>
-                    <p>{document.content}</p>
-                </div>
-            )
-        ) : (
-            <p>Loading...</p>
-        )}
-        <Link to={`/documentedit/${document._id}`}>
-        <button>Edit</button>
-        </Link>
-        <InviteForm documentId={id} />
+                <p>Loading...</p>
+            )}
+            <Link to={`/documentedit/${document._id}`}>
+                <button>Edit</button>
+            </Link>
+            <InviteForm documentId={id} />
         </main>
     );
 };

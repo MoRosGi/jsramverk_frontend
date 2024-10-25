@@ -18,6 +18,7 @@ const UserDocuments = () => {
                         }
                     }
                 );
+
                 const data = await response.json();
                 setDocuments(data.data);
 
@@ -29,7 +30,6 @@ const UserDocuments = () => {
         };
 
         fetchData();
-
     }, []);
 
     return (

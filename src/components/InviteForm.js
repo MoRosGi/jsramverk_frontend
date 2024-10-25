@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 const InviteForm = ({ documentId }) => {
+    const [inviteForm, setInviteForm] = useState({ receiver: '', documentId: documentId });
 
-    const [inviteForm, setInviteForm,] = useState({ receiver: '', documentId: documentId });
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInviteForm({ ...inviteForm, [name]: value });
-        };
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,17 +16,19 @@ const InviteForm = ({ documentId }) => {
         console.log(typeof(inviteForm.documentId));
 
         try {
-            const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/invite', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-access-token': sessionStorage.getItem('token')
-            },
-            body: JSON.stringify(inviteForm)
-            });
+            const response = await fetch(
+                'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/invite',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': sessionStorage.getItem('token')
+                    },
+                    body: JSON.stringify(inviteForm)
+                }
+            );
 
             const result = await response.json();
-
             toast(result);
             console.log(result);
 
@@ -35,6 +37,7 @@ const InviteForm = ({ documentId }) => {
             console.error('Error:', error);
         }
     };
+
     return (
         <form onSubmit={handleSubmit}>
             <div>
