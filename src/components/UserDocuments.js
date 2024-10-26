@@ -43,7 +43,7 @@ const UserDocuments = () => {
                         </div>
                     ))
                 ) : (
-                    <p>{documents[0]?.error ? documents[0].error : 'Laddar...'}</p>
+                    <p>{documents?.length > 0 ? (documents[0].error || 'Loading...') : 'No documents.'}</p>
                 )}
                 <button>
                     <Link to="/documentform">Create new document</Link>
