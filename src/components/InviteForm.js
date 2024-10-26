@@ -29,7 +29,13 @@ const InviteForm = ({ documentId }) => {
             );
 
             const result = await response.json();
-            toast(result);
+
+            if (result.errors) {
+                toast(result.errors[0].detail);
+                return;
+            }
+
+            toast('Invitation sent.');
             console.log(result);
 
         } catch (error) {
