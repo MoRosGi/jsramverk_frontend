@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
+import AuthWrapper from './AuthWrapper';
 
 const DocumentForm = () => {
     const [formDocument, setFormDocument] = useState({ title: '', content: '' });
@@ -38,33 +39,35 @@ const DocumentForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+        <AuthWrapper>
+            <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor='title'>Title:</label>
+                    <div>
+                        <label htmlFor='title'>Title:</label>
+                    </div>
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        value={formDocument.title}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
-                <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    value={formDocument.title}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
                 <div>
-                    <label htmlFor='content'>Content:</label>
+                    <div>
+                        <label htmlFor='content'>Content:</label>
+                    </div>
+                    <textarea
+                        name="content"
+                        id="content"
+                        value={formDocument.content}
+                        onChange={handleChange}
+                    />
                 </div>
-                <textarea
-                    name="content"
-                    id="content"
-                    value={formDocument.content}
-                    onChange={handleChange}
-                />
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </AuthWrapper>
     );
 };
 

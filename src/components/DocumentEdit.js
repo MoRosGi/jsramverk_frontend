@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
 import { useParams } from 'react-router-dom';
 import InviteForm from './InviteForm';
+import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
 
 const DocumentEdit = () => {
@@ -69,33 +70,35 @@ const DocumentEdit = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <AuthWrapper>
+                <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor='title'>Title:</label>
+                        <div>
+                            <label htmlFor='title'>Title:</label>
+                        </div>
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            value={documentEdit.title}
+                            onChange={handleChange}
+                        />
                     </div>
-                    <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        value={documentEdit.title}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
                     <div>
-                        <label htmlFor='content'>Content:</label>
+                        <div>
+                            <label htmlFor='content'>Content:</label>
+                        </div>
+                        <textarea
+                            name="content"
+                            id="content"
+                            value={documentEdit.content}
+                            onChange={handleChange}
+                        />
                     </div>
-                    <textarea
-                        name="content"
-                        id="content"
-                        value={documentEdit.content}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-            <InviteForm documentId={id} />
+                    <button type="submit">Submit</button>
+                </form>
+                <InviteForm documentId={id} />
+            </AuthWrapper>
         </>
     );
 };
