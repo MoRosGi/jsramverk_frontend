@@ -7,13 +7,13 @@ const Layout = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Log in</Link>
+                        <Link to="/">Log in/Register</Link>
                     </li>
                     <li>
-                        <Link to="/register">Register</Link>
+                        <Link to="/userdocuments">My documents</Link>
                     </li>
                     <li>
-                        <Link to="/documentform">Create new document</Link>
+                        <Link to="/documentform">New document</Link>
                     </li>
                 </ul>
                 <LogoutButton />
