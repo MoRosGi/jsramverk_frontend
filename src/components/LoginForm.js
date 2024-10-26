@@ -38,6 +38,7 @@ const LoginForm = () => {
 
                 if (inviteId) {
                     navigate(`/invite/${inviteId}`);
+                    return;
                 }
                 console.log(sessionStorage.getItem('inviteId'));
                 navigate('/userdocuments');
@@ -76,8 +77,12 @@ const LoginForm = () => {
                     onChange={handleChange}
                 />
             </div>
-            <button type="submit">Log in</button>
-            <Link to="/register"><button type="button">Create new account</button></Link>
+            <div>
+                <button type="submit">Log in</button>
+            </div>
+            <div>
+                <Link to="/register">Create new account</Link>
+            </div>
         </form>
     );
 };
