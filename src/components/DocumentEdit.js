@@ -57,7 +57,7 @@ const DocumentEdit = () => {
             const result = await response.json();
             toast(result);
             console.log('Success:', result);
-            navigate('/');
+            navigate(`/${id}`);
 
         } catch (error) {
             toast(error);
