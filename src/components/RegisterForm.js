@@ -15,6 +15,12 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(formRegister.email)) {
+            toast("Invalid email format.");
+            return;
+        }
         // Check if password is min 6 characters
         if (formRegister.password.length < 6) {
             toast("Password must be at least 6 characters long.");
@@ -42,7 +48,7 @@ const RegisterForm = () => {
             if (inviteId) {
                 navigate(`/invite/${inviteId}`);
             }
-            navigate('/');
+            navigate('/userdocuments');
 
         } catch (error) {
             toast(error);
