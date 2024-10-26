@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import InviteForm from './InviteForm';
+import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
 
 const Document = () => {
@@ -33,25 +34,28 @@ const Document = () => {
 
     }, [id]);
 
+    // Change document._id to document?._id to prevent big red error screen if no documents/not logged in.
     return (
-        <main>
-            {document ? (
-                document.error ? (
-                    <p>{document.error}</p>
+        <AuthWrapper>
+            <main>
+                {document ? (
+                    document.error ? (
+                        <p>{document.error}</p>
+                    ) : (
+                        <div>
+                            <h1>{document.title}</h1>
+                            <p>{document.content}</p>
+                        </div>
+                    )
                 ) : (
-                    <div>
-                        <h1>{document.title}</h1>
-                        <p>{document.content}</p>
-                    </div>
-                )
-            ) : (
-                <p>Loading...</p>
-            )}
-            <Link to={`/documentedit/${document._id}`}>
-                <button>Edit</button>
-            </Link>
-            <InviteForm documentId={id} />
-        </main>
+                    <p>Loading...</p>
+                )}
+                <Link to={`/documentedit/${document?._id}`}>
+                    <button>Edit</button>
+                </Link>
+                <InviteForm documentId={id} />
+            </main>
+        </AuthWrapper>
     );
 };
 
