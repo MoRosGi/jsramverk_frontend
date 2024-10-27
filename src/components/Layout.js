@@ -15,8 +15,10 @@ const Layout = () => {
                     <li>
                         <Link to="/documentform">New document</Link>
                     </li>
+                    <li>
+                        <LogoutButton />
+                    </li>
                 </ul>
-                <LogoutButton />
             </nav>
             <Outlet />
         </>
