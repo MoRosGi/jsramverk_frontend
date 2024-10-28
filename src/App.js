@@ -11,6 +11,7 @@ import LoginForm from "./components/LoginForm.js";
 import UserDocuments from "./components/UserDocuments.js";
 import AcceptInvite from "./components/AcceptInvite.js";
 import Footer from "./components/Footer.js";
+import DocumentUpdate from "./components/DocumentUpdate.js";
 
 // Changes 2024-10-26:
 // Divide routes into public and protected to display Layout, including menu and 
@@ -36,6 +37,7 @@ function App() {
             <Route path="/documentform" element={<DocumentForm />}/>
             <Route path="/documentedit/:id" element={<DocumentEdit />}/>
             <Route path="/userdocuments" element={<UserDocuments />}/>
+            <Route path="/documentupdate/:id" element={<DocumentUpdate />}/>
           </Route>
         </Routes>
         <Footer />
