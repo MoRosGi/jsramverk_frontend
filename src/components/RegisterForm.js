@@ -1,38 +1,57 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
+import { toast } from 'react-toastify';
 
 const RegisterForm = () => {
     const [formRegister, setFormRegister] = useState({ email: '', password: '' });
     const navigate = useNavigate();
-    
+    const inviteId = sessionStorage.getItem('inviteId');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormRegister({ ...formRegister, [name]: value });
-        };
-    
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(formRegister.email)) {
+            toast("Invalid email format.");
+            return;
+        }
+        // Check if password is min 6 characters
+        if (formRegister.password.length < 6) {
+            toast("Password must be at least 6 characters long.");
+            return;
+        }
+
         try {
-            const response = await fetch('https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formRegister)
-            });
-    
+            const response = await fetch(
+                'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/register',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formRegister)
+                }
+            );
+
             const result = await response.json();
             console.log('Success:', result);
 
-            console.log('Token:', result.data.token);
             const token = result.data.token;
             sessionStorage.setItem('token', token);
 
-            // Handle redirect depending on token or no token
-            navigate('/');
+            if (inviteId) {
+                navigate(`/invite/${inviteId}`);
+            }
+            navigate('/userdocuments');
 
         } catch (error) {
+            toast(error);
             console.error('Error:', error);
         }
     };
@@ -40,31 +59,31 @@ const RegisterForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
+                <div>
+                    <label htmlFor='email'>E-mail:</label>
+                </div>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={formRegister.email}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
             <div>
-                <label htmlFor='email'>Email:</label>
+                <div>
+                    <label htmlFor='password'>Password:</label>
+                </div>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={formRegister.password}
+                    onChange={handleChange}
+                />
             </div>
-            <input
-                type="email"
-                name="email"
-                id="email"
-                value={formRegister.email}
-                onChange={handleChange}
-                required
-            />
-            </div>
-            <div>
-            <div>
-                <label htmlFor='password'>Password:</label>
-            </div>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                value={formRegister.password}
-                onChange={handleChange}
-            />
-            </div>
-            <button type="submit">Skapa konto</button>
+            <button type="submit">Register</button>
         </form>
     );
 };

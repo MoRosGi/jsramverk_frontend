@@ -1,23 +1,26 @@
 import { Outlet, Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 const Layout = () => {
     return (
         <>
-        <nav>
-            <ul>
-            <li>
-                <Link to="/">Logga in</Link>
-            </li>
-            <li>
-                <Link to="/register">Registrera</Link>
-            </li>
-            <li>
-                <Link to="/documentform">Nytt dokument</Link>
-            </li>
-            </ul>
-        </nav>
-
-        <Outlet />
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/">Log in/Register</Link>
+                    </li>
+                    <li>
+                        <Link to="/userdocuments">My documents</Link>
+                    </li>
+                    <li>
+                        <Link to="/documentform">New document</Link>
+                    </li>
+                    <li>
+                        <LogoutButton />
+                    </li>
+                </ul>
+            </nav>
+            <Outlet />
         </>
     )
 };
