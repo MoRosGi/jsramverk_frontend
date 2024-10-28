@@ -13,13 +13,6 @@ import AcceptInvite from "./components/AcceptInvite.js";
 import Footer from "./components/Footer.js";
 import DocumentUpdate from "./components/DocumentUpdate.js";
 
-// Changes 2024-10-26:
-// Divide routes into public and protected to display Layout, including menu and 
-// LogoutButton, only on protected routes.
-// Include Footer component inside HashRouter, outside of the Routes to include it at
-// the bottom of every route.
-// Add className "app-container", a flexbox wrapper to simplify styling and help 
-// position the Footer component.
 function App() {
   return (
     <HashRouter>
