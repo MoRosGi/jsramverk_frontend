@@ -53,6 +53,9 @@ const Document = () => {
                 <Link to={`/documentedit/${document?._id}`}>
                     <button>Edit</button>
                 </Link>
+                <Link to={`/documentupdate/${document?._id}`}>
+                    <button>Update</button>
+                </Link>
                 <InviteForm documentId={id} />
             </main>
         </AuthWrapper>
