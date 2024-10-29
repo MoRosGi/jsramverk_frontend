@@ -1,37 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // import { useNavigate } from "react-router";
 import { useParams } from 'react-router-dom';
 import InviteForm from './InviteForm';
 import AuthWrapper from './AuthWrapper';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { io } from 'socket.io-client';
 
-// const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/';
-const SERVER_URL ='http://localhost:3000';
+const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+// const SERVER_URL ='http://localhost:3000';
+// let socket; // Move let socket outside function to make it last
 
 const DocumentUpdate = () => {
-    const documentId = useParams();
+    const { id: documentId } = useParams()
+    // const titleRef = useRef('');
     const [documentUpdate, setDocumentUpdate] = useState({ title: '', content: '' });
     // const [title, setTitle] = useState('');
     // const [content, setContent] = useState('');
     // const navigate = useNavigate();
-    console.log(documentId.id);
+    console.log("First", documentId);
     // console.log(useParams());
-
-    let socket;
+    const socket = useRef(null);
 
     useEffect(() => {
-        socket = io(SERVER_URL);
 
-        socket.emit("joinDocument", documentId.id);
-        // console.log(documentId);
+        // const fetchData = async () => {
+        //     try {
+        //         const response = await fetch(
+        //             `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${documentId}`,
+        //             {
+        //                 method: 'GET',
+        //                 headers: {
+        //                     'x-access-token': sessionStorage.getItem("token")
+        //                 }
+        //             }
+        //         );
 
-        // socket.on("documentUpdate", (data) => {
-        //     setContent(data);
+        //         const data = await response.json();
+        //         setDocumentUpdate(data.data);
+        //     } catch (e) {
+        //         toast(e);
+        //         console.error(e);
+        //     }
+        // };
+
+        // fetchData();
+        // socket.current = io(SERVER_URL);
+        socket.current = io(SERVER_URL, { query: {token: sessionStorage.getItem('token')}});
+        console.log("Token:", sessionStorage.getItem('token'));
+
+        socket.current.emit("joinDocument", documentId);
+        console.log("After join room", documentId);
+
+        socket.current.on(`userInfo`, (data) => {
+            console.log(`userInfo`, data.user);
+        })
+
+        socket.current.on("documentUpdate", (data) => {
+            setDocumentUpdate(data);
+            console.log("Update data:", data);
+        });
+
+        // socket.current.on("documentSaved", (data) => {
+        //     toast(data.message);
         // });
 
         return () => {
-            socket.disconnect();
+            socket.current.disconnect();
         }
     }, [documentId]);
 
@@ -43,39 +77,18 @@ const DocumentUpdate = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        const updatedDocument = { ...documentUpdate, [name]: value };
         // console.log(e.target);
         // console.log("Title:", content.title);
-        setDocumentUpdate({ ...documentUpdate, [name]: value });
+        setDocumentUpdate(updatedDocument);
+
+        socket.current.emit("documentUpdate", {
+            documentId,
+            title: updatedDocument.title,
+            content: updatedDocument.content
+        });
+        console.log("New title", updatedDocument.title);
     };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     try {
-    //         const response = await fetch(
-    //             `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`,
-    //             {
-    //                 method: 'PUT',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'x-access-token': sessionStorage.getItem("token")
-    //                 },
-    //                 body: JSON.stringify(documentUpdate)
-    //             }
-    //         );
-
-    //         const result = await response.json();
-    //         toast(result);
-    //         console.log('Success:', result);
-    //         navigate(`/${id}`);
-
-    //     } catch (error) {
-    //         toast(error);
-    //         console.error('Error:', error);
-    //         sessionStorage.clear();
-    //         navigate('/login');
-    //     }
-    // };
 
     return (
         <>
