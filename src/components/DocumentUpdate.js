@@ -6,18 +6,18 @@ import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
 import { io } from 'socket.io-client';
 
-const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
-// const SERVER_URL ='http://localhost:3000';
+// const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+const SERVER_URL ='http://localhost:1337';
 // let socket; // Move let socket outside function to make it last
 
 const DocumentUpdate = () => {
-    const { id: documentId } = useParams()
+    const { id: _id } = useParams()
     // const titleRef = useRef('');
     const [documentUpdate, setDocumentUpdate] = useState({ title: '', content: '' });
     // const [title, setTitle] = useState('');
     // const [content, setContent] = useState('');
     // const navigate = useNavigate();
-    console.log("First", documentId);
+    // console.log("First", _id);
     // console.log(useParams());
     const socket = useRef(null);
 
@@ -26,7 +26,7 @@ const DocumentUpdate = () => {
         // const fetchData = async () => {
         //     try {
         //         const response = await fetch(
-        //             `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${documentId}`,
+        //             `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${_id}`,
         //             {
         //                 method: 'GET',
         //                 headers: {
@@ -48,26 +48,26 @@ const DocumentUpdate = () => {
         socket.current = io(SERVER_URL, { query: {token: sessionStorage.getItem('token')}});
         console.log("Token:", sessionStorage.getItem('token'));
 
-        socket.current.emit("joinDocument", documentId);
-        console.log("After join room", documentId);
+        socket.current.emit("joinDocument", _id);
+        // console.log("After join room", _id);
 
-        socket.current.on(`userInfo`, (data) => {
-            console.log(`userInfo`, data.user);
-        })
+        // socket.current.on(`userInfo`, (data) => {
+        //     console.log(`userInfo`, data.user);
+        // })
 
         socket.current.on("documentUpdate", (data) => {
             setDocumentUpdate(data);
-            console.log("Update data:", data);
+            // console.log("Update data:", data);
         });
 
-        // socket.current.on("documentSaved", (data) => {
-        //     toast(data.message);
-        // });
+        socket.current.on("documentSaved", (data) => {
+            toast(data.message);
+        });
 
         return () => {
             socket.current.disconnect();
         }
-    }, [documentId]);
+    }, [_id]);
 
     // const handleChange = (e) => {
     //     const value = e.target;
@@ -83,11 +83,11 @@ const DocumentUpdate = () => {
         setDocumentUpdate(updatedDocument);
 
         socket.current.emit("documentUpdate", {
-            documentId,
+            _id,
             title: updatedDocument.title,
             content: updatedDocument.content
         });
-        console.log("New title", updatedDocument.title);
+        // console.log("New title", updatedDocument.title);
     };
 
     return (
@@ -120,7 +120,7 @@ const DocumentUpdate = () => {
                     <h1>{documentUpdate.title}</h1>
                     <p>{documentUpdate.content}</p>
                 </div>
-                <InviteForm documentId={documentId} />
+                <InviteForm _id={_id} />
             </AuthWrapper>
         </>
     );
