@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import styles from "./InviteForm.module.css";
 
 const InviteForm = ({ documentId }) => {
     // Add placeholder as default receiver to make it show on render
@@ -54,9 +55,10 @@ const InviteForm = ({ documentId }) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='email'>Add collaborator</label>
+                <label className={styles.label} htmlFor='email'>Add collaborator</label>
             </div>
             <select
+                className={styles.select}
                 name="receiver"
                 value={inviteForm.receiver}
                 onChange={handleChange}
@@ -68,7 +70,7 @@ const InviteForm = ({ documentId }) => {
                 <option value="angt23@student.bth.se">Annie Student</option>
                 <option value="mogi23@student.bth.se">Morgane Student</option>
             </select>
-            <button type="submit">Send</button>
+            <button className={styles.button} type="submit">Send</button>
         </form>
     );
 };

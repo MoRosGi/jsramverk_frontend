@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
     const [formLogin, setFormLogin] = useState({ email: '', password: '' });
@@ -78,10 +79,10 @@ const LoginForm = () => {
                 />
             </div>
             <div>
-                <button type="submit">Log in</button>
+                <button className={styles.button} type="submit">Log in</button>
             </div>
             <div>
-                <Link to="/register">Create new account</Link>
+                <Link to="/register" className={styles.Link}>Create new account</Link>
             </div>
         </form>
     );
