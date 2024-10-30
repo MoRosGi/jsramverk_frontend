@@ -11,6 +11,8 @@
     margin-left: 1.4rem;
 }
 
-.documentwrapper {
-    max-width: 1/3;
+.editorwrapper,
+.commentwrapper,
+.outputwrapper {
+    max-width: 33%;
 }

@@ -110,11 +110,12 @@ const DocumentUpdate = () => {
                                 />
                             </div>
                             </div>
-                        
-                        <div id="output-container">
-                            <h1>{documentUpdate.title}</h1>
-                            <p>{documentUpdate.content}</p>
-                        </div>
+                            <div className={styles.outputwrapper}>
+                                <div id="output-container">
+                                    <h1>{documentUpdate.title}</h1>
+                                    <p>{documentUpdate.content}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </AuthWrapper>
