@@ -1,0 +1,16 @@
+/* DocumentUpdate style */
+.updatewrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.editorwrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.4rem;
+}
+
+.documentwrapper {
+    max-width: 1/3;
+}
