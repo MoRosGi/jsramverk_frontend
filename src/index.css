@@ -110,3 +110,7 @@ footer {
     flex-shrink: 0;
     margin-top: auto;
 }
+
+.comment-text {
+  background: lime;
+}
