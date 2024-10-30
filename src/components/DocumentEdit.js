@@ -71,6 +71,7 @@ const DocumentEdit = () => {
     return (
         <>
             <AuthWrapper>
+                <InviteForm documentId={id} />
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div>
@@ -97,7 +98,6 @@ const DocumentEdit = () => {
                     </div>
                     <button type="submit">Submit</button>
                 </form>
-                <InviteForm documentId={id} />
             </AuthWrapper>
         </>
     );

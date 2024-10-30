@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router";
 import { useParams, Link } from 'react-router-dom';
 import InviteForm from './InviteForm';
 import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
 
 const Document = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [document, setDocument] = useState('');
 
@@ -22,6 +24,12 @@ const Document = () => {
                 );
 
                 const data = await response.json();
+
+                if (data.errors) {
+                    toast(data.errors[0].detail);
+                    navigate('/userdocuments');
+                }
+
                 setDocument(data.data);
 
             } catch (e) {
@@ -32,11 +40,11 @@ const Document = () => {
 
         fetchData();
 
-    }, [id]);
+    }, [id, navigate]);
 
-    // Change document._id to document?._id to prevent big red error screen if no documents/not logged in.
     return (
         <AuthWrapper>
+            <InviteForm documentId={id} />
             <main>
                 {document ? (
                     document.error ? (
@@ -50,13 +58,9 @@ const Document = () => {
                 ) : (
                     <p>Loading...</p>
                 )}
-                <Link to={`/documentedit/${document?._id}`}>
-                    <button>Edit</button>
-                </Link>
                 <Link to={`/documentupdate/${document?._id}`}>
                     <button>Update</button>
                 </Link>
-                <InviteForm documentId={id} />
             </main>
         </AuthWrapper>
     );
