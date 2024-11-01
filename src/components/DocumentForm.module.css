@@ -1,0 +1,17 @@
+/* DocumentForm style */
+.button {
+    font-size: 0.8em;
+    margin-bottom: 1.2rem;
+    padding: 0.5em 1em;
+    max-width: fit-content;
+}
+
+.textarea {
+    margin-top: 50px;
+    min-height: 400px;
+    min-width: 500px;
+}
+
+.input {
+    max-height: 1.8em;
+}

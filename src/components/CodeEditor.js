@@ -31,7 +31,12 @@ const CodeEditor = ({
 
     return (
         <div className={styles.CodeEditorWrapper}>
-            <button type="button" onClick={handleRunCode}>Run Code</button>
+            <button onClick={handleRunCode}
+                className={styles.button}
+                type="button"
+                >
+                    Run Code
+                </button>
             <div className={styles.codeEditor}>
                 <CodeMirror
                     value={content}

@@ -36,19 +36,23 @@ const UserDocuments = () => {
     return (
         <AuthWrapper>
             <main>
-                <h1>My documents</h1>
-                {documents.length > 0 ? (
-                    documents.map((document) => (
-                        <div key={document._id}>
-                            <h2><Link className={styles.Link} to={`/${document._id}`}>{document.title}</Link></h2>
-                        </div>
-                    ))
-                ) : (
-                    <p>{documents?.length > 0 ? (documents[0].error || 'Loading...') : 'No documents.'}</p>
-                )}
-                <button>
-                    <Link to="/documentform">Create new document</Link>
-                </button>
+                <div className={styles.myDocumentsWrapper}>
+                    <div className={styles.myDocumentsHeader}>
+                        <h2>My documents</h2>
+                        <button className={styles.button}>
+                            <Link to="/documentform">Create new document</Link>
+                        </button>
+                    </div>
+                    {documents.length > 0 ? (
+                        documents.map((document) => (
+                            <div key={document._id}>
+                                <h3><Link className={styles.Link} to={`/${document._id}`}>{document.title}</Link></h3>
+                            </div>
+                        ))
+                    ) : (
+                        <p>{documents?.length > 0 ? (documents[0].error || 'Loading...') : 'No documents.'}</p>
+                    )}
+                </div>
             </main>
         </AuthWrapper>
     );

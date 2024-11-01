@@ -45,26 +45,28 @@ const Document = () => {
 
     return (
         <AuthWrapper>
-            <main className={styles.main}>
-                <div className={styles.buttonBarWrapper}>
-                    <InviteForm documentId={id} />
-                    <Link to={`/documentupdate/${document?._id}`}className={styles.a}>
-                        <button className={styles.button}>Update</button>
-                    </Link>
-                </div>
+            <main>
                 <div className={styles.documentWrapper}>
-                    {document ? (
-                        document.error ? (
-                            <p>{document.error}</p>
+                    <div className={styles.buttonBarWrapper}>
+                        <InviteForm documentId={id} />
+                        <Link to={`/documentupdate/${document?._id}`}className={styles.a}>
+                            <button className={styles.buttonEdit}>Edit document</button>
+                        </Link>
+                    </div>
+                    <div className={styles.documentWrapper}>
+                        {document ? (
+                            document.error ? (
+                                <p>{document.error}</p>
+                            ) : (
+                                <div>
+                                    <h2>{document.title}</h2>
+                                    <p dangerouslySetInnerHTML={{ __html: document.content }} />
+                                </div>
+                            )
                         ) : (
-                            <div>
-                                <h1>{document.title}</h1>
-                                <p dangerouslySetInnerHTML={{ __html: document.content }} />
-                            </div>
-                        )
-                    ) : (
-                        <p>Loading...</p>
-                    )}
+                            <p>Loading...</p>
+                        )}
+                    </div>
                 </div>
             </main>
         </AuthWrapper>

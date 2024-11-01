@@ -2,7 +2,9 @@
 .updatewrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 2rem;
+    min-width: 37rem;
 }
 
 .editorwrapper {
@@ -13,5 +15,22 @@
 
 .editorwrapper,
 .outputwrapper {
-    max-width: 50%;
+    width: 50%;
+}
+
+.button {
+    font-size: 0.8em;
+    margin-bottom: 1.2rem;
+    padding: 0.5em 1em;
+    max-width: fit-content;
+}
+
+.textarea {
+    margin-top: 50px;
+    min-height: 400px;
+    max-width: 100%;
+}
+
+.input {
+    max-height: 1.8em;
 }

@@ -2,3 +2,37 @@
 .Link {
     text-decoration: none;
 }
+
+.myDocumentsWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 37em;
+    margin: auto 0;
+}
+
+.myDocumentsWrapper h3 {
+    margin: 0.4rem 0 0 0.6rem;
+}
+
+.button {
+    font-size: 0.8em;
+    margin-bottom: 1.2rem;
+    padding: 0.5em 1em;
+    max-width: fit-content;
+}
+
+.myDocumentsHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 5rem;
+}
+
+.myDocumentsWrapper a {
+    color: #444;
+}
+
+.myDocumentsWrapper a:hover {
+    color: #a66907;
+}
