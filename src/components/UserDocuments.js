@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AuthWrapper from './AuthWrapper';
+import styles from './UserDocuments.module.css';
 
 const UserDocuments = () => {
     const [documents, setDocuments] = useState([]);
@@ -39,7 +40,7 @@ const UserDocuments = () => {
                 {documents.length > 0 ? (
                     documents.map((document) => (
                         <div key={document._id}>
-                            <h2><Link to={`/${document._id}`}>{document.title}</Link></h2>
+                            <h2><Link className={styles.Link} to={`/${document._id}`}>{document.title}</Link></h2>
                         </div>
                     ))
                 ) : (

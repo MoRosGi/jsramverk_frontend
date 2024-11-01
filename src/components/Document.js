@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import InviteForm from './InviteForm';
 import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
+import styles from "./Document.module.css";
 
 const Document = () => {
     const navigate = useNavigate();
@@ -44,23 +45,27 @@ const Document = () => {
 
     return (
         <AuthWrapper>
-            <InviteForm documentId={id} />
-            <main>
-                {document ? (
-                    document.error ? (
-                        <p>{document.error}</p>
+            <main className={styles.main}>
+                <div className={styles.buttonBarWrapper}>
+                    <InviteForm documentId={id} />
+                    <Link to={`/documentupdate/${document?._id}`}className={styles.a}>
+                        <button className={styles.button}>Update</button>
+                    </Link>
+                </div>
+                <div className={styles.documentWrapper}>
+                    {document ? (
+                        document.error ? (
+                            <p>{document.error}</p>
+                        ) : (
+                            <div>
+                                <h1>{document.title}</h1>
+                                <p dangerouslySetInnerHTML={{ __html: document.content }} />
+                            </div>
+                        )
                     ) : (
-                        <div>
-                            <h1>{document.title}</h1>
-                            <p>{document.content}</p>
-                        </div>
-                    )
-                ) : (
-                    <p>Loading...</p>
-                )}
-                <Link to={`/documentupdate/${document?._id}`}>
-                    <button>Update</button>
-                </Link>
+                        <p>Loading...</p>
+                    )}
+                </div>
             </main>
         </AuthWrapper>
     );
