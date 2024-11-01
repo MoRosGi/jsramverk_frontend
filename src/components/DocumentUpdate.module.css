@@ -12,7 +12,6 @@
 }
 
 .editorwrapper,
-.commentwrapper,
 .outputwrapper {
-    max-width: 33%;
+    max-width: 50%;
 }
