@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { useParams } from 'react-router';
 import { toast } from 'react-toastify';
+import styles from './AcceptInvite.module.css';
 
 const AcceptInvite = () => {
     const navigate = useNavigate();
@@ -43,10 +44,16 @@ const AcceptInvite = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <p>Your e-mail address will be added to a shared document. Click OK to log in or register a new account.</p>
-            <button type="submit">OK</button>
-        </form>
+        <main>
+            <div className={styles.acceptWrapper}>
+                <form onSubmit={handleSubmit}>
+                    <p>Your e-mail address will be added to a shared document. Click OK to log in or register a new account.</p>
+                    <button className={styles.button} type="submit">OK</button>
+                </form>
+            </div>
+            
+        </main>
+
     );
 };
 

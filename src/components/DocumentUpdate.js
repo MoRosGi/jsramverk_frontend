@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from "react-router";
 import { useParams } from 'react-router-dom';
@@ -6,6 +5,7 @@ import InviteForm from './InviteForm';
 import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
 import { io } from 'socket.io-client';
+import CodeEditor from './CodeEditor';
 import styles from './DocumentUpdate.module.css';
 
 const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
@@ -13,7 +13,11 @@ const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-0
 
 const DocumentUpdate = () => {
     const { id: _id } = useParams()
-    const [documentUpdate, setDocumentUpdate] = useState({ title: '', content: '' });
+    const [documentUpdate, setDocumentUpdate] = useState({ title: '', content: '', isCode: false });
+    // const [isCodeMode, setIsCodeMode] = useState(() => {
+    //     // const savedMode = sessionStorage.getItem('isCodeMode');
+    //     // return savedMode === 'true';
+    // }); 
     const navigate = useNavigate();
     const socket = useRef(null);
     let toastId = useRef(null);
@@ -23,7 +27,7 @@ const DocumentUpdate = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${_id}`,
+                    `${SERVER_URL}/documents/${_id}`,
                     {
                         method: 'GET',
                         headers: {
@@ -70,55 +74,74 @@ const DocumentUpdate = () => {
         }
     }, [_id, navigate]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        const updatedDocument = { ...documentUpdate, [name]: value };
+    const handleChange = (field, value) => {
+        const updatedDocument = { ...documentUpdate, [field]: value};
         setDocumentUpdate(updatedDocument);
 
         socket.current.emit("documentUpdate", {
             _id,
-            title: updatedDocument.title,
-            content: updatedDocument.content
+            title: updatedDocument.title || "Untitled",
+            content: updatedDocument.content,
+            isCode: updatedDocument.isCode
         });
+        console.log("Is it code", updatedDocument.isCode);
     };
 
     return (
         <>
             <AuthWrapper>
-            <InviteForm _id={_id} />
-                <div>
-                    <div className={styles.updatewrapper}>
-                        <div className={styles.editorwrapper}>
-                            <div>
-                                <label htmlFor='title'>Title:</label>
-                            </div>
-                            <input
-                                type="text"
-                                name="title"
-                                id="title"
-                                value={documentUpdate.title}
-                                onChange={handleChange}
-                            />
-                            <div>
-                                <div>
-                                    <label htmlFor='content'>Content:</label>
-                                </div>
-                                <textarea
-                                    name="content"
-                                    id="content"
-                                    value={documentUpdate.content}
-                                    onChange={handleChange}
+                <main>
+                    <div className={styles.updateWrapper}>
+                        <InviteForm documentId={_id} />
+                        <div className={styles.updatewrapper}>
+                            <div className={styles.editorwrapper}>
+                                <label htmlFor="title">Title:</label>
+                                <input
+                                    className={styles.input}
+                                    type="text"
+                                    name="title"
+                                    id="title"
+                                    value={documentUpdate.title || "Untitled"}
+                                    onChange={(e) => handleChange ('title', e.target.value)}
                                 />
+                                <button onClick={() => 
+                                    handleChange ('isCode', !documentUpdate.isCode)}
+                                    className={styles.button}
+                                >
+                                    Switch to {documentUpdate.isCode ? "Text Mode" : "Code Mode"}
+                                </button>
+                                {documentUpdate.isCode ? (
+                                    <CodeEditor
+                                    content={documentUpdate.content}
+                                    setContent={(value) => handleChange('content', value)}
+                                    title={documentUpdate.title}
+                                    isCode={documentUpdate.isCode}
+                                    socket={socket.current}
+                                    id={_id}
+                                />
+                                ) : (
+                                    <textarea
+                                        className={styles.textarea}
+                                        name="content"
+                                        id="content"
+                                        value={documentUpdate.content}
+                                        onChange={(e) => handleChange ('content', e.target.value)}
+                                    />
+                                )}
                             </div>
-                            </div>
-                            <div className={styles.outputwrapper}>
-                                <div id="output-container">
-                                    <h1>{documentUpdate.title}</h1>
-                                    <p>{documentUpdate.content}</p>
-                                </div>
-                            </div>
+                                {!documentUpdate.isCode && (
+                                    <div className={styles.outputwrapper}>
+                                        <div id="output-container">
+                                            <h1>{documentUpdate.title}</h1>
+                                            <div dangerouslySetInnerHTML={{ __html: (documentUpdate.content) }}></div>
+                                        </div>
+                                    </div>
+                                )}
                         </div>
                     </div>
+                    
+                </main>
+                
             </AuthWrapper>
         </>
     );

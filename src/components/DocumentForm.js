@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import AuthWrapper from './AuthWrapper';
+import CodeEditor from './CodeEditor';
+import styles from './DocumentForm.module.css';
 
 const DocumentForm = () => {
-    const [formDocument, setFormDocument] = useState({ title: '', content: '' });
+    const [formDocument, setFormDocument] = useState({ title: '', content: '', isCode: false });
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormDocument({ ...formDocument, [name]: value });
+    const handleChange = (field, value) => {
+        const newDocument = { ...formDocument, [field]: value};
+        setFormDocument(newDocument);
     };
 
     const handleSubmit = async (e) => {
@@ -40,33 +42,57 @@ const DocumentForm = () => {
 
     return (
         <AuthWrapper>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <main>
+                <form className={styles.form} onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor='title'>Title:</label>
+                        <div>
+                            <label htmlFor="title">Title:</label>
+                        </div>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            name="title"
+                            id="title"
+                            value={formDocument.title}
+                            onChange={(e) => handleChange ('title', e.target.value)}
+                            required
+                        />
                     </div>
-                    <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        value={formDocument.title}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
+
                     <div>
-                        <label htmlFor='content'>Content:</label>
+                        <div>
+                            <button onClick={() => 
+                                handleChange ('isCode', !formDocument.isCode)}
+                                className={styles.button}
+                                type='button'
+                            >
+                                Switch to {formDocument.isCode ? "Text Mode" : "Code Mode"}
+                            </button>
+                        </div>
+
+                        {formDocument.isCode ? (
+                            <CodeEditor
+                            content={formDocument.content}
+                            setContent={(value) => handleChange('content', value)}
+                            title={formDocument.title}
+                        />
+                        ) : (
+                            <textarea
+                                className={styles.textarea}
+                                name="content"
+                                id="content"
+                                value={formDocument.content}
+                                onChange={(e) => handleChange ('content', e.target.value)}
+                                required
+                            />
+                        )}
+                        <div>
+                            <button className={styles.button} type="submit">Submit</button>
+                        </div>
                     </div>
-                    <textarea
-                        name="content"
-                        id="content"
-                        value={formDocument.content}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+                </form>
+            </main>
+            
         </AuthWrapper>
     );
 };

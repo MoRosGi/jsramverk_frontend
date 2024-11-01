@@ -52,7 +52,7 @@ const LoginForm = () => {
     };
     // Add checks for valid email and password length min 6 chars
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             <div>
                 <div>
                     <label htmlFor='email'>E-mail:</label>

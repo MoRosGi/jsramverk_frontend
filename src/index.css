@@ -45,6 +45,10 @@ body {
   min-height: 100vh;
 }
 
+.app-container h1 {
+  align-self: center;
+}
+
 h1 {
     font-size: 1.8rem;
 }
@@ -68,13 +72,26 @@ header {
 main {
     width: 96%;
     max-width: 64rem;
-    margin: 1.4rem auto;
-    flex: 1 0 auto;
+    margin: 2.8rem auto;
+    display: flex;
+    /* flex: 1 0 auto; */
+    justify-content: center;
 }
 
 .new-doc {
     display: flex;
     flex-direction: column;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 0 2rem;
 }
 
 nav,

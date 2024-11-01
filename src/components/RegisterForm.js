@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
+import styles from "./RegisterForm.module.css";
 
 const RegisterForm = () => {
     const [formRegister, setFormRegister] = useState({ email: '', password: '' });
@@ -57,7 +58,7 @@ const RegisterForm = () => {
     };
     // Add checks for valid email and password length min 6 chars
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             <div>
                 <div>
                     <label htmlFor='email'>E-mail:</label>
@@ -83,7 +84,7 @@ const RegisterForm = () => {
                     onChange={handleChange}
                 />
             </div>
-            <button type="submit">Register</button>
+            <button className={styles.button} type="submit">Register</button>
         </form>
     );
 };

@@ -4,8 +4,11 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@ddietr/codemirror-themes": "^1.4.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^14.5.2",
+    "@uiw/react-codemirror": "^4.23.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
