@@ -8,10 +8,7 @@ import styles from './CodeEditor.module.css';
 
 const CodeEditor = ({
         content,
-        setContent,
-        title,
-        socket,
-        id
+        setContent
     }) => {
     const [codeOutput, setCodeOutput] = useState("");
     const editorRef = useRef(null);
@@ -21,16 +18,6 @@ const CodeEditor = ({
             editorRef.current.getEditor().setValue(content);
         }
     }, [content]);
-
-    const handleChange = (value) => {
-        setContent(value);
-
-        socket.emit("documentUpdate", {
-            _id: id,
-            title: title,
-            content: value
-        });
-    };
 
     const handleRunCode = async () => {
         try {
@@ -49,7 +36,7 @@ const CodeEditor = ({
                 <CodeMirror
                     value={content}
                     extensions={[javascript(), githubLight, EditorView.lineWrapping]}
-                    onChange={handleChange}
+                    onChange={setContent}
                 />
                 <div className={styles.outputWrapper}>
                     <pre className={styles.codeOutput}>
