@@ -1,4 +1,31 @@
 /* Document style */
-.documentWrapper {
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     max-width: 50%;
+}
+.documentWrapper {
+    display: flex;
+    /* max-width: 50%; */
+}
+
+.buttonBarWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    font-size: 0.8em;
+    margin-right: 1em;
+    padding: 0.5em 1em;
+
 }

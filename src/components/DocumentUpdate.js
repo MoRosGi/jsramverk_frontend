@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from "react-router";
 import { useParams } from 'react-router-dom';
@@ -16,7 +17,6 @@ const DocumentUpdate = () => {
     const navigate = useNavigate();
     const socket = useRef(null);
     let toastId = useRef(null);
-    let targetId = "";
 
     useEffect(() => {
 
@@ -41,10 +41,8 @@ const DocumentUpdate = () => {
         };
 
         fetchData();
-
-
-
         socket.current = io(SERVER_URL, { query: {token: sessionStorage.getItem('token')}});
+        console.log(socket.current);
 
         if (socket.current._opts.secure === false) {
             navigate(`/documentedit/${_id}`);
@@ -84,80 +82,6 @@ const DocumentUpdate = () => {
         });
     };
 
-    const commentAlert = (e) => {
-        e.preventDefault();
-        console.log("hej");
-
-        // From backend:
-        // get document by _id
-        // get comment by commentId
-    }
-
-    const handleSelection = (e) => {
-        e.preventDefault();
-        const contentInput = document.getElementById("content");
-        
-        contentInput.focus();
-        // contentInput.setSelectionRange(0, 5)
-
-        const selectionStart = contentInput.selectionStart;
-        const selectionEnd = contentInput.selectionEnd;
-        const selectedText = contentInput.value.substring(selectionStart, selectionEnd);
-
-        console.log(selectedText);
-        
-        // const selectedText = window.getSelection();
-        // const range = selectedText.getRangeAt(0);
-        const commentId = Math.floor(Math.random() * 100000);
-        // console.log(selectedText);
-        const commentSelection = document.createElement('span')
-        // let commentSelection = `<span className="comment-text" id="comment-id-${commentId}">${selectedText.toString()}</span>`
-        commentSelection.className = "comment-text";
-        commentSelection.id = `comment-id-${commentId}`;
-        commentSelection.textContent = selectedText.toString();
-        targetId = `comment-id-${commentId}`;
-
-        console.log("targetId2", targetId);
-
-        // console.log(commentSelection);
-        // range.deleteContents();
-        // range.insertNode(commentSelection);
-        const contentBefore = contentInput.value.substring(0, selectionStart);
-        const contentAfter = contentInput.value.substring(selectionEnd)
-        console.log("Before:", contentBefore);
-        console.log("After:", contentAfter);
-
-        const commentSelectionSpan = commentSelection.outerHTML;
-        const extractedIdArray = commentSelectionSpan.match(/id="([^"]+)"/);
-        console.log(extractedIdArray[1]);
-
-        const extractedId = extractedIdArray[1];
-        console.log(extractedId);
-
-        const contentInputValue = contentBefore + commentSelection.outerHTML + contentAfter;
-        contentInput.value = contentInputValue;
-        // contentInput.innerHTML = contentInputValue;
-        console.log("Outer", commentSelection.outerHTML);
-
-        const commentTarget = document.getElementById(extractedId);
-        console.log("After id", extractedId);
-        // commentTarget.addEventListener("click", commentAlert);
-        console.log("Hej", commentSelection);
-        console.log("The id", commentTarget);
-    };
-
-    const addClickToSpan = () => {
-        const commentTarget = document.getElementById(targetId);
-        if (commentTarget != null) {
-            commentTarget.addEventListener("click", commentAlert);
-        } else {
-            console.log("TargetId", targetId);
-        }
-        
-    };
-
-    addClickToSpan();
-
     return (
         <>
             <AuthWrapper>
@@ -190,19 +114,8 @@ const DocumentUpdate = () => {
                             <div className={styles.outputwrapper}>
                                 <div id="output-container">
                                     <h1>{documentUpdate.title}</h1>
-                                    <p dangerouslySetInnerHTML={{__html: documentUpdate.content }}/>
+                                    <p>{documentUpdate.content}</p>
                                 </div>
-                            </div>
-                            <div className={styles.commentwrapper}>
-                                
-                                <button type="submit" onClick={handleSelection}>Add comment</button>
-                                <textarea
-                                    name="content"
-                                    id="content"
-                                    value={documentUpdate.content}
-                                    onChange={handleChange}
-                                />
-                                <p dangerouslySetInnerHTML={{__html: documentUpdate.content }}/>
                             </div>
                         </div>
                     </div>

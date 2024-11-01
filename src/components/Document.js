@@ -45,8 +45,13 @@ const Document = () => {
 
     return (
         <AuthWrapper>
-            <InviteForm documentId={id} />
-            <main>
+            <main className={styles.main}>
+                <div className={styles.buttonBarWrapper}>
+                    <InviteForm documentId={id} />
+                    <Link to={`/documentupdate/${document?._id}`}className={styles.a}>
+                        <button className={styles.button}>Update</button>
+                    </Link>
+                </div>
                 <div className={styles.documentWrapper}>
                     {document ? (
                         document.error ? (
@@ -61,9 +66,6 @@ const Document = () => {
                         <p>Loading...</p>
                     )}
                 </div>
-                <Link to={`/documentupdate/${document?._id}`}>
-                    <button>Update</button>
-                </Link>
             </main>
         </AuthWrapper>
     );
