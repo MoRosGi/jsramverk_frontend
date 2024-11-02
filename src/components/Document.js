@@ -68,7 +68,9 @@ const Document = () => {
                                     <h2>
                                         {document.title}
                                     </h2>
-                                    <p dangerouslySetInnerHTML={{ __html: document.content }} />
+                                    <p>
+                                        {document.content}
+                                    </p>
                                 </div>
                             )
                         ) : (

@@ -128,7 +128,9 @@ const DocumentUpdate = () => {
                                             <h1>
                                                 {documentUpdate.title}
                                             </h1>
-                                            <div dangerouslySetInnerHTML={{ __html: (documentUpdate.content) }}></div>
+                                            <p>
+                                                {documentUpdate.content}
+                                            </p>
                                         </div>
                                     </div>
                                 )}
