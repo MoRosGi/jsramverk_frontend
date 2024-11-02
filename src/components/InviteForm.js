@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import styles from "./InviteForm.module.css";
 
+const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+
 const InviteForm = ({ documentId }) => {
-    // Add placeholder as default receiver to make it show on render
     const [inviteForm, setInviteForm] = useState({ receiver: '', documentId: documentId });
 
     const handleChange = (e) => {
@@ -14,7 +15,6 @@ const InviteForm = ({ documentId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Check select menu for placeholder, early return if no valid selection
         if (inviteForm.receiver === '') {
             toast('You must select a recipient to send an invite.');
             return;
@@ -25,7 +25,7 @@ const InviteForm = ({ documentId }) => {
 
         try {
             const response = await fetch(
-                'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/invite',
+                `${SERVER_URL}/invite`,
                 {
                     method: 'POST',
                     headers: {
@@ -55,7 +55,9 @@ const InviteForm = ({ documentId }) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label className={styles.label} htmlFor='email'>Add collaborator</label>
+                <label className={styles.label} htmlFor='email'>
+                    Add collaborator
+                </label>
             </div>
             <select
                 className={styles.select}
@@ -64,13 +66,28 @@ const InviteForm = ({ documentId }) => {
                 onChange={handleChange}
                 required
             >
-                <option value="" disabled>Select a recipient</option>
-                <option value="annie.v.gustafsson@gmail.com">Annie Gustafsson</option>
-                <option value="morgane.rose.girard@gmail.com">Morgane Girard</option>
-                <option value="angt23@student.bth.se">Annie Student</option>
-                <option value="mogi23@student.bth.se">Morgane Student</option>
+                <option value="" disabled>
+                    Select a recipient
+                </option>
+                <option value="annie.v.gustafsson@gmail.com">
+                    Annie Gustafsson
+                </option>
+                <option value="morgane.rose.girard@gmail.com">
+                    Morgane Girard
+                </option>
+                <option value="angt23@student.bth.se">
+                    Annie Student
+                </option>
+                <option value="mogi23@student.bth.se">
+                    Morgane Student
+                </option>
+                <option value="emil.folino@bth.se">
+                    Emil Folino
+                </option>
             </select>
-            <button className={styles.button} type="submit">Send</button>
+            <button className={styles.button} type="submit">
+                Send
+            </button>
         </form>
     );
 };
