@@ -43,10 +43,6 @@ const DocumentUpdate = () => {
         socket.current = io(SERVER_URL, { query: {token: sessionStorage.getItem('token')}});
         console.log(socket.current);
 
-        // if (socket.current._opts.secure === false) {
-        //     navigate(`/documentedit/${_id}`);
-        // }
-
         socket.current.emit("joinDocument", _id);
 
         socket.current.on("documentUpdate", (data) => {
