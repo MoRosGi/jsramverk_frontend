@@ -9,7 +9,6 @@ import CodeEditor from './CodeEditor';
 import styles from './DocumentUpdate.module.css';
 
 const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
-// const SERVER_URL ='http://localhost:1337';
 
 const DocumentUpdate = () => {
     const { id: _id } = useParams()
