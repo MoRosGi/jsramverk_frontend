@@ -1,0 +1,15 @@
+/* LoginForm style */
+
+.Link {
+    color: #a66907;;
+}
+
+.button {
+    font-size: 0.8em;
+    padding: 0.5em 1em;
+}
+
+.form {
+    align-self: center;
+    justify-self: center;
+}

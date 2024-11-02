@@ -1,0 +1,35 @@
+/* CodeEditor style */
+
+.codeEditorWrapper {
+    display: flex;
+}
+
+.codeEditor {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    overflow: auto;
+    margin-bottom: 1.4rem;
+}
+
+.codeOutput {
+    max-width: 50%;
+}
+
+.CodeEditor_codeOutput__2pATO {
+    max-width: 50%;
+}
+
+.button {
+    color: #a66907;
+    border: 1px solid #a66907;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-bottom: 1.2rem;
+    padding: 0.5em 1em;
+    max-width: fit-content;
+}

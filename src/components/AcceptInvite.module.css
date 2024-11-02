@@ -1,0 +1,32 @@
+/* AcceptInvite style */
+
+.acceptWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 25rem;
+}
+
+.acceptWrapper form {
+    display: flex;
+    flex-direction: column;
+}
+
+.acceptWrapper form button {
+    align-self: center;
+}
+
+.button {
+    background-color: #a66907;
+    color: #eee;
+    border: 1px solid #a66907;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-bottom: 1.2rem;
+    padding: 0.5em 1em;
+    max-width: fit-content;
+    align-self: center;
+}
+
+.button:hover {
+    border: 2px solid #815002;
+}

@@ -1,0 +1,38 @@
+/* Document style */
+
+.documentWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 37em;
+    margin: auto 1.4rem;
+}
+
+.documentWrapper h3 {
+    margin: 0.4rem 0 0 0.6rem;
+}
+
+.buttonBarWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: left;
+    gap: 5rem;
+}
+
+.a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button,
+.buttonEdit {
+    font-size: 0.8em;
+    margin-right: 1em;
+    padding: 0.5em 1em;
+}
+
+.buttonEdit {
+    margin-top: 25px;
+}
