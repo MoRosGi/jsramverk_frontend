@@ -3,7 +3,7 @@
 ---
 # SSR Editor - Frontend
 
-![Screenshot of Documents Page](ssr-image.png)
+![Screenshot of Documents Page](./public/ssr-image.png)
 
 ## Introduction
 **SSR Editor** is the frontend component of a collaborative text editor application, created as part of the **jsramverk course assignment**. This web application is built with **React** and utilizes **Server-Side Rendering (SSR)** for improved performance. The frontend is hosted on a student server.
