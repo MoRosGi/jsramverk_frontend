@@ -1,7 +1,9 @@
 /* CodeEditor style */
+
 .codeEditorWrapper {
     display: flex;
 }
+
 .codeEditor {
     display: flex;
     flex-direction: column;
@@ -13,13 +15,6 @@
     overflow: auto;
     margin-bottom: 1.4rem;
 }
-
-/* .cm-content,
-.cm-activeLine,
-.cm-theme-light {
-    min-width: 50%;
-    max-width: 50%;
-} */
 
 .codeOutput {
     max-width: 50%;

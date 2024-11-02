@@ -40,7 +40,11 @@ const CodeEditor = ({
             <div className={styles.codeEditor}>
                 <CodeMirror
                     value={content}
-                    extensions={[javascript(), githubLight, EditorView.lineWrapping]}
+                    extensions={[
+                        javascript(),
+                        githubLight,
+                        EditorView.lineWrapping
+                    ]}
                     onChange={setContent}
                 />
                 <div className={styles.outputWrapper}>

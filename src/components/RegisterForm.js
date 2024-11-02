@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import styles from "./RegisterForm.module.css";
 
+const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+
 const RegisterForm = () => {
     const [formRegister, setFormRegister] = useState({ email: '', password: '' });
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ const RegisterForm = () => {
             toast("Invalid email format.");
             return;
         }
-        // Check if password is min 6 characters
+
         if (formRegister.password.length < 6) {
             toast("Password must be at least 6 characters long.");
             return;
@@ -30,7 +32,7 @@ const RegisterForm = () => {
 
         try {
             const response = await fetch(
-                'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/register',
+                `${SERVER_URL}/register`,
                 {
                     method: 'POST',
                     headers: {
@@ -56,12 +58,14 @@ const RegisterForm = () => {
             console.error('Error:', error);
         }
     };
-    // Add checks for valid email and password length min 6 chars
+
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div>
                 <div>
-                    <label htmlFor='email'>E-mail:</label>
+                    <label htmlFor='email'>
+                        E-mail:
+                    </label>
                 </div>
                 <input
                     type="email"
@@ -74,7 +78,9 @@ const RegisterForm = () => {
             </div>
             <div>
                 <div>
-                    <label htmlFor='password'>Password:</label>
+                    <label htmlFor='password'>
+                        Password:
+                    </label>
                 </div>
                 <input
                     type="password"
@@ -84,7 +90,9 @@ const RegisterForm = () => {
                     onChange={handleChange}
                 />
             </div>
-            <button className={styles.button} type="submit">Register</button>
+            <button className={styles.button} type="submit">
+                Register
+            </button>
         </form>
     );
 };

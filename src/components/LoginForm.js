@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import styles from "./LoginForm.module.css";
 
+const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+
 const LoginForm = () => {
     const [formLogin, setFormLogin] = useState({ email: '', password: '' });
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ const LoginForm = () => {
 
         try {
             const response = await fetch(
-                'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/login',
+                `${SERVER_URL}/login`,
                 {
                     method: 'POST',
                     headers: {
@@ -50,12 +52,14 @@ const LoginForm = () => {
             console.error('Error:', error);
         }
     };
-    // Add checks for valid email and password length min 6 chars
+
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div>
                 <div>
-                    <label htmlFor='email'>E-mail:</label>
+                    <label htmlFor='email'>
+                        E-mail:
+                    </label>
                 </div>
                 <input
                     type="email"
@@ -68,7 +72,9 @@ const LoginForm = () => {
             </div>
             <div>
                 <div>
-                    <label htmlFor='password'>Password:</label>
+                    <label htmlFor='password'>
+                        Password:
+                    </label>
                 </div>
                 <input
                     type="password"
@@ -79,10 +85,14 @@ const LoginForm = () => {
                 />
             </div>
             <div>
-                <button className={styles.button} type="submit">Log in</button>
+                <button className={styles.button} type="submit">
+                    Log in
+                </button>
             </div>
             <div>
-                <Link to="/register" className={styles.Link}>Create new account</Link>
+                <Link to="/register" className={styles.Link}>
+                    Create new account
+                </Link>
             </div>
         </form>
     );

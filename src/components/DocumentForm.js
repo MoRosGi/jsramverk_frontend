@@ -5,6 +5,8 @@ import AuthWrapper from './AuthWrapper';
 import CodeEditor from './CodeEditor';
 import styles from './DocumentForm.module.css';
 
+const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+
 const DocumentForm = () => {
     const [formDocument, setFormDocument] = useState({ title: '', content: '', isCode: false });
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ const DocumentForm = () => {
 
         try {
             const response = await fetch(
-                'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents',
+                `${SERVER_URL}/documents`,
                 {
                     method: 'POST',
                     headers: {
@@ -46,7 +48,9 @@ const DocumentForm = () => {
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div>
                         <div>
-                            <label htmlFor="title">Title:</label>
+                            <label htmlFor="title">
+                                Title:
+                            </label>
                         </div>
                         <input
                             className={styles.input}
@@ -87,7 +91,12 @@ const DocumentForm = () => {
                             />
                         )}
                         <div>
-                            <button className={styles.button} type="submit">Submit</button>
+                            <button
+                                className={styles.button}
+                                type="submit"
+                            >
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </form>

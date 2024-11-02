@@ -3,6 +3,8 @@ import { useParams } from 'react-router';
 import { toast } from 'react-toastify';
 import styles from './AcceptInvite.module.css';
 
+const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+
 const AcceptInvite = () => {
     const navigate = useNavigate();
     const { inviteId } = useParams();
@@ -14,7 +16,7 @@ const AcceptInvite = () => {
         if (token) {
             try {
                 const response = await fetch(
-                    `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/invite/${inviteId}`,
+                    `${SERVER_URL}/invite/${inviteId}`,
                     {
                         method: 'GET',
                         headers: {
@@ -47,8 +49,12 @@ const AcceptInvite = () => {
         <main>
             <div className={styles.acceptWrapper}>
                 <form onSubmit={handleSubmit}>
-                    <p>Your e-mail address will be added to a shared document. Click OK to log in or register a new account.</p>
-                    <button className={styles.button} type="submit">OK</button>
+                    <p>
+                        Your e-mail address will be added to a shared document. Click OK to log in or register a new account.
+                        </p>
+                    <button className={styles.button} type="submit">
+                        OK
+                    </button>
                 </form>
             </div>
             

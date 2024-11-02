@@ -5,6 +5,8 @@ import InviteForm from './InviteForm';
 import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
 
+const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
+
 const DocumentEdit = () => {
     const { id } = useParams();
     const [documentEdit, setDocumentEdit] = useState({ title: '', content: '' });
@@ -14,7 +16,7 @@ const DocumentEdit = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`,
+                    `${SERVER_URL}/documents/${id}`,
                     {
                         method: 'GET',
                         headers: {
@@ -44,7 +46,7 @@ const DocumentEdit = () => {
 
         try {
             const response = await fetch(
-                `https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net/documents/${id}`,
+                `${SERVER_URL}/documents/${id}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -75,7 +77,9 @@ const DocumentEdit = () => {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div>
-                            <label htmlFor='title'>Title:</label>
+                            <label htmlFor='title'>
+                                Title:
+                            </label>
                         </div>
                         <input
                             type="text"
@@ -87,7 +91,9 @@ const DocumentEdit = () => {
                     </div>
                     <div>
                         <div>
-                            <label htmlFor='content'>Content:</label>
+                            <label htmlFor='content'>
+                                Content:
+                            </label>
                         </div>
                         <textarea
                             name="content"
@@ -96,7 +102,9 @@ const DocumentEdit = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit">
+                        Submit
+                    </button>
                 </form>
             </AuthWrapper>
         </>

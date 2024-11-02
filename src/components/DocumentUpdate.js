@@ -14,10 +14,6 @@ const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-0
 const DocumentUpdate = () => {
     const { id: _id } = useParams()
     const [documentUpdate, setDocumentUpdate] = useState({ title: '', content: '', isCode: false });
-    // const [isCodeMode, setIsCodeMode] = useState(() => {
-    //     // const savedMode = sessionStorage.getItem('isCodeMode');
-    //     // return savedMode === 'true';
-    // }); 
     const navigate = useNavigate();
     const socket = useRef(null);
     let toastId = useRef(null);
@@ -48,9 +44,9 @@ const DocumentUpdate = () => {
         socket.current = io(SERVER_URL, { query: {token: sessionStorage.getItem('token')}});
         console.log(socket.current);
 
-        if (socket.current._opts.secure === false) {
-            navigate(`/documentedit/${_id}`);
-        }
+        // if (socket.current._opts.secure === false) {
+        //     navigate(`/documentedit/${_id}`);
+        // }
 
         socket.current.emit("joinDocument", _id);
 
@@ -95,7 +91,9 @@ const DocumentUpdate = () => {
                         <InviteForm documentId={_id} />
                         <div className={styles.updatewrapper}>
                             <div className={styles.editorwrapper}>
-                                <label htmlFor="title">Title:</label>
+                                <label htmlFor="title">
+                                    Title:
+                                </label>
                                 <input
                                     className={styles.input}
                                     type="text"
@@ -132,7 +130,9 @@ const DocumentUpdate = () => {
                                 {!documentUpdate.isCode && (
                                     <div className={styles.outputwrapper}>
                                         <div id="output-container">
-                                            <h1>{documentUpdate.title}</h1>
+                                            <h1>
+                                                {documentUpdate.title}
+                                            </h1>
                                             <div dangerouslySetInnerHTML={{ __html: (documentUpdate.content) }}></div>
                                         </div>
                                     </div>
@@ -141,7 +141,6 @@ const DocumentUpdate = () => {
                     </div>
                     
                 </main>
-                
             </AuthWrapper>
         </>
     );

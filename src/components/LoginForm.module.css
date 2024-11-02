@@ -1,13 +1,12 @@
 /* LoginForm style */
+
 .Link {
     color: #a66907;;
 }
 
 .button {
     font-size: 0.8em;
-    /* margin-left: 1em; */
     padding: 0.5em 1em;
-
 }
 
 .form {
