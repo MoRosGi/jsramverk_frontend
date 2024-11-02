@@ -74,7 +74,6 @@ main {
     max-width: 64rem;
     margin: 2.8rem auto;
     display: flex;
-    /* flex: 1 0 auto; */
     justify-content: center;
 }
 
