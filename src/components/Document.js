@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import InviteForm from './InviteForm';
 import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
+import DOMPurify from 'dompurify';
 import styles from "./Document.module.css";
 
 const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
@@ -68,9 +69,9 @@ const Document = () => {
                                     <h2>
                                         {document.title}
                                     </h2>
-                                    <p>
-                                        {document.content}
-                                    </p>
+                                    <p 
+                                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(document.content)}}
+                                    />
                                 </div>
                             )
                         ) : (

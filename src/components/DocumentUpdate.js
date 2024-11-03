@@ -6,6 +6,7 @@ import AuthWrapper from './AuthWrapper';
 import { toast } from 'react-toastify';
 import { io } from 'socket.io-client';
 import CodeEditor from './CodeEditor';
+import DOMPurify from 'dompurify';
 import styles from './DocumentUpdate.module.css';
 
 const SERVER_URL = 'https://jsramverk-text-editor-beb8fuhxangpdqfh.northeurope-01.azurewebsites.net';
@@ -128,9 +129,9 @@ const DocumentUpdate = () => {
                                             <h1>
                                                 {documentUpdate.title}
                                             </h1>
-                                            <p>
-                                                {documentUpdate.content}
-                                            </p>
+                                            <p
+                                                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(documentUpdate.content)}}
+                                            />
                                         </div>
                                     </div>
                                 )}
